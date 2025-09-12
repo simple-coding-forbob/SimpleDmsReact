@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans+KR:wght@100..900&display=swap');
+@import "tailwindcss";
+@import "rc-pagination/assets/index.css";
+
+:root {
+    --black: black;
+    --gray: gray;
+}
+
+body {font-family: "Montserrat","Noto Sans KR", sans-serif;line-height: 1.6;}
+
+.drop-down-item {
+    @apply absolute top-full left-0 opacity-0 invisible group-hover:opacity-100 
+            group-hover:visible transition-all bg-white text-black w-32 p-2 rounded;
+}
+
+.drop-left-item {
+    @apply absolute left-full top-0 opacity-0 invisible group-hover:opacity-100 
+            group-hover:visible transition-all bg-white text-black w-32 p-2 rounded;
+}

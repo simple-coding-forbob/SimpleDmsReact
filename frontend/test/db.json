@@ -1,0 +1,8 @@
+{
+    "dept": [
+      { "dno": 10, "dname": "Sales", "loc": "New York" },
+      { "dno": 20, "dname": "Marketing", "loc": "Chicago" },
+      { "dno": 30, "dname": "Engineering", "loc": "San Francisco" },
+      { "dno": 40, "dname": "HR", "loc": "Boston" }
+    ]
+}

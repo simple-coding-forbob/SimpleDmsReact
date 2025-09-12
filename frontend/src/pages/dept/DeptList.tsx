@@ -1,0 +1,100 @@
+import { useEffect, useState } from "react";
+
+import { Link } from "react-router-dom";
+import DeptService from "../../services/DeptService";
+import type IDept from "../../types/dept/IDept";
+import Pagination from "rc-pagination";
+
+const DeptList = () => {
+  const [dept, setDept] = useState<IDept[]>([]);
+  const [searchKeyword, setSearchKeyword] = useState<string>("");
+  const [page, setPage] = useState<number>(1);
+  const [totalPages, setTotalPages] = useState<number>(0);
+  const itemsPerPage = 3;
+
+  const handlePageChange = (page: number) => {
+    setPage(page);
+    console.log("현재 페이지:", page);
+  };
+
+  const onChangeSearchKeyword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchKeyword(e.target.value);
+    setPage(1);
+  };
+
+  const selectList = () => {
+    DeptService.getAll(searchKeyword, page - 1, itemsPerPage)
+      .then((response) => {
+        const { data, totalPages } = response.data;
+        setDept(data);
+        setTotalPages(totalPages);
+        console.log(response.data);
+      })
+      .catch((e: Error) => console.log(e));
+  };
+
+  useEffect(() => {
+    selectList();
+  }, [page]);
+
+  return (
+    <>
+      <h1 className="text-2xl font-bold mb-6">부서 조회</h1>
+
+      <div className="flex justify-center mb-4">
+        <input
+          type="text"
+          className="w-[100%] border border-gray-300 rounded-l px-3 py-2 focus:outline-none"
+          placeholder="부서명 검색"
+          value={searchKeyword}
+          onChange={onChangeSearchKeyword}
+        />
+        <button
+          className="bg-blue-500 text-white hover:bg-blue-600 px-4 py-2 rounded-r"
+          onClick={selectList}
+        >
+          Search
+        </button>
+      </div>
+
+      <div>
+        <table className="w-[100%] border border-gray-200">
+          <thead className="bg-blue-500 text-white">
+            <tr>
+              <th className="px-4 py-2 border-b">Dname</th>
+              <th className="px-4 py-2 border-b">Loc</th>
+              <th className="px-4 py-2 border-b">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            {dept.map((data) => (
+              <tr key={data.dno} className="hover:bg-gray-50">
+                <td className="px-4 py-2 border-b">{data.dname}</td>
+                <td className="px-4 py-2 border-b">{data.loc}</td>
+                <td className="px-4 py-2 border-b">
+                  <Link to={`/dept/${data.dno}`}>
+                    <span className="bg-green-500 text-white hover:bg-green-600 px-2 py-1 rounded">
+                      Edit
+                    </span>
+                  </Link>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <div className="flex justify-center mt-4">
+        <Pagination
+          current={page}
+          total={totalPages * itemsPerPage}
+          pageSize={itemsPerPage}
+          onChange={handlePageChange}
+          className="flex space-x-2"
+        />
+      </div>
+    </>
+  );
+};
+
+export default DeptList;

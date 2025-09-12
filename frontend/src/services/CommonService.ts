@@ -3,7 +3,7 @@ import axios from "axios";
 // todo: baseURL: "http://스프링ip:스프링port/공통url"
 // react <-> springboot : json 객체(통신)
 const common = axios.create({
-  baseURL: "http://localhost:8080",
+  baseURL: "http://localhost:8080/api",
   headers: {
     "Content-Type": "application/json"
   }

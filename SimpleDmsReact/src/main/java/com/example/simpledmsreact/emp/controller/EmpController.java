@@ -20,14 +20,14 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @Tag(name = "EmpController", description = "사원 API 문서")
-@RequestMapping("/api/emp")
+@RequestMapping("/api")
 public class EmpController {
 
 	private final EmpService empService;
 
 	// 전체 조회
 	@Operation(summary = "사원 전체 조회", description = "검색 키워드로 사원 목록을 조회합니다.")
-	@GetMapping
+	@GetMapping("/emp")
 	public ResponseEntity<ApiResponse<List<EmpDto>>> selectEmpList(
 			@Parameter(description = "검색 키워드") @RequestParam(defaultValue = "") String searchKeyword,
 			@PageableDefault(page = 0, size = 3) Pageable pageable) {
@@ -38,7 +38,7 @@ public class EmpController {
 				"조회 성공",
 				pages.getContent(),
 				pages.getNumber(),
-				pages.getTotalPages()
+				pages.getTotalElements()
 		);
 
 		return ResponseEntity.ok(response);
@@ -46,7 +46,7 @@ public class EmpController {
 
 	// 저장
 	@Operation(summary = "사원 저장", description = "새로운 사원을 등록합니다.")
-	@PostMapping
+	@PostMapping("/emp")
 	public ResponseEntity<ApiResponse<EmpDto>> create(@RequestBody EmpDto empDto) {
 		empService.save(empDto);
 		ApiResponse<EmpDto> response = new ApiResponse<>(true, "저장 성공", null, 0, 0);
@@ -55,7 +55,7 @@ public class EmpController {
 
 	// 수정
 	@Operation(summary = "사원 수정", description = "사원을 수정합니다.")
-	@PutMapping("/{eno}")
+	@PutMapping("/emp/{eno}")
 	public ResponseEntity<ApiResponse<EmpDto>> update(
 			@Parameter(description = "수정할 사원 번호") @PathVariable long eno,
 			@RequestBody EmpDto empDto) {
@@ -67,7 +67,7 @@ public class EmpController {
 
 	// 상세조회
 	@Operation(summary = "사원 상세 조회", description = "사원 번호로 상세 정보를 조회합니다.")
-	@GetMapping("/{eno}")
+	@GetMapping("/emp/{eno}")
 	public ResponseEntity<ApiResponse<EmpDto>> findById(
 			@Parameter(description = "조회할 사원 번호") @PathVariable long eno) {
 
@@ -78,7 +78,7 @@ public class EmpController {
 
 	// 삭제
 	@Operation(summary = "사원 삭제", description = "사원 번호로 삭제합니다.")
-	@DeleteMapping("/{eno}")
+	@DeleteMapping("/emp/{eno}")
 	public ResponseEntity<ApiResponse> delete(@PathVariable long eno) {
 		empService.deleteById(eno);
 		ApiResponse response = new ApiResponse<>(true, "삭제 성공", null, 0, 0);

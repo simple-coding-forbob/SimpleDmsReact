@@ -2,5 +2,5 @@
 
 export default interface IDeptList {
   data: IDept[];
-  totalPages: number;
+  totalNumber: number;
 }

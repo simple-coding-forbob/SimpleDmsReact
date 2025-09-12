@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
-
 import { Link } from "react-router-dom";
 import DeptService from "../../services/DeptService";
 import type IDept from "../../types/dept/IDept";
 import Pagination from "rc-pagination";
 
 const DeptList = () => {
-  const [dept, setDept] = useState<IDept[]>([]);
+  const [depts, setDepts] = useState<IDept[]>([]);
   const [searchKeyword, setSearchKeyword] = useState<string>("");
   const [page, setPage] = useState<number>(1);
-  const [totalPages, setTotalPages] = useState<number>(0);
-  const itemsPerPage = 3;
+  const [totalNumber, setTotalNumber] = useState<number>(0);
+  const size = 3;
 
   const handlePageChange = (page: number) => {
     setPage(page);
@@ -22,15 +21,16 @@ const DeptList = () => {
     setPage(1);
   };
 
-  const selectList = () => {
-    DeptService.getAll(searchKeyword, page - 1, itemsPerPage)
-      .then((response) => {
-        const { data, totalPages } = response.data;
-        setDept(data);
-        setTotalPages(totalPages);
-        console.log(response.data);
-      })
-      .catch((e: Error) => console.log(e));
+  const selectList = async () => {
+    try {
+      const response = await DeptService.getAll(searchKeyword, page - 1, size);
+      const { data, totalNumber } = response.data;
+      setDepts(data);
+      setTotalNumber(totalNumber);
+      console.log(response.data);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   useEffect(() => {
@@ -44,7 +44,7 @@ const DeptList = () => {
       <div className="flex justify-center mb-4">
         <input
           type="text"
-          className="w-[100%] border border-gray-300 rounded-l px-3 py-2 focus:outline-none"
+          className="w-full border border-gray-300 rounded-l p-2 focus:outline-none focus:ring focus:ring-blue-500"
           placeholder="부서명 검색"
           value={searchKeyword}
           onChange={onChangeSearchKeyword}
@@ -61,13 +61,13 @@ const DeptList = () => {
         <table className="w-[100%] border border-gray-200">
           <thead className="bg-blue-500 text-white">
             <tr>
-              <th className="px-4 py-2 border-b">Dname</th>
-              <th className="px-4 py-2 border-b">Loc</th>
-              <th className="px-4 py-2 border-b">Actions</th>
+              <th className="px-4 py-2 border-b">dname</th>
+              <th className="px-4 py-2 border-b">loc</th>
+              <th className="px-4 py-2 border-b">actions</th>
             </tr>
           </thead>
           <tbody>
-            {dept.map((data) => (
+            {depts.map((data) => (
               <tr key={data.dno} className="hover:bg-gray-50">
                 <td className="px-4 py-2 border-b">{data.dname}</td>
                 <td className="px-4 py-2 border-b">{data.loc}</td>
@@ -87,8 +87,8 @@ const DeptList = () => {
       <div className="flex justify-center mt-4">
         <Pagination
           current={page}
-          total={totalPages * itemsPerPage}
-          pageSize={itemsPerPage}
+          total={totalNumber}
+          pageSize={size}
           onChange={handlePageChange}
           className="flex space-x-2"
         />

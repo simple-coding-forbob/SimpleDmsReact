@@ -2,7 +2,8 @@ import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import EmpService from "../../services/EmpService";
-import type IEmp from "../../types/dept/IEmp";
+
+import type IEmp from "../../types/IEmp";
 import empValidation from "../../utils/empValidation";
 
 function EmpDetail() {

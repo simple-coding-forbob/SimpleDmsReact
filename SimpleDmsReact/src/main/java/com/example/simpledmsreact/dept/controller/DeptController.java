@@ -38,7 +38,6 @@ public class DeptController {
 	public ResponseEntity<ApiResponse<List<DeptDto>>> selectDeptList(@Parameter(description = "검색 키워드") @RequestParam(defaultValue = "") String searchKeyword,
                                                                @PageableDefault(page = 0, size = 3) Pageable pageable) {
 //		1) Pageable : page(현재페이지), size(1페이지 당 화면에 보일개수)
-//		Pageable pageable = PageRequest.of(page, size);
 //		전체조회 서비스 메소드 실행
 		Page<DeptDto> pages=deptService.selectDeptList(searchKeyword, pageable);
 		log.info("테스트 : "+pages);
@@ -50,7 +49,7 @@ public class DeptController {
     // 저장
     @Operation(summary = "부서 저장", description = "새로운 부서를 등록합니다.")
     @PostMapping("/dept")
-    public ResponseEntity<ApiResponse<DeptDto>> create(@RequestBody DeptDto deptDto) {
+    public ResponseEntity<Void> create(@RequestBody DeptDto deptDto) {
         deptService.save(deptDto);
         return ResponseEntity.ok().build();
     }
@@ -59,10 +58,11 @@ public class DeptController {
     // dno는 사용하지 않더라도 넣는게 Restful 함
     @Operation(summary = "부서 수정", description = "부서를 수정합니다.")
     @PutMapping("/dept/{dno}")
-    public ResponseEntity<ApiResponse<DeptDto>> update(
-            @Parameter(description = "수정할 부서 번호") @PathVariable int dno,
+    public ResponseEntity<Void> update(
+            @Parameter(description = "수정할 부서 번호") @PathVariable long dno,
             @RequestBody DeptDto deptDto) {
-        deptService.save(deptDto);
+        deptDto.setDno(dno);
+        deptService.updateFromDto(deptDto);
         return ResponseEntity.ok().build();
     }
 
@@ -79,7 +79,7 @@ public class DeptController {
     // 삭제
     @Operation(summary = "부서 삭제", description = "부서 번호로 삭제합니다.")
     @DeleteMapping("/dept/{dno}")
-    public ResponseEntity<ApiResponse> delete(@Parameter(description = "삭제할 부서 번호") @PathVariable int dno) {
+    public ResponseEntity<Void> delete(@Parameter(description = "삭제할 부서 번호") @PathVariable int dno) {
         deptService.deleteById(dno);
 
         return ResponseEntity.ok().build();

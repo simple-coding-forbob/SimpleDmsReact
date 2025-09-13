@@ -53,6 +53,23 @@ export default function Navbar() {
                 </li>
               </ul>
             </li>
+            <li className="relative group">
+              <a href="#" className="hover:underline">
+                FileDb
+              </a>
+              <ul className="drop-down-item">
+                <li className="m-2">
+                  <a href="/fileDb" className="hover:underline">
+                    FileDb 조회
+                  </a>
+                </li>
+                <li className="m-2">
+                  <a href="/add-fileDb" className="hover:underline">
+                    FileDb 추가
+                  </a>
+                </li>
+              </ul>
+            </li>
           </ul>
         </div>
 
@@ -99,41 +116,44 @@ export default function Navbar() {
           <ul className="flex flex-col gap-2">
             {/* PC 메뉴 */}
             <li>
-              <a href="/">
-                홈
-              </a>
+              <a href="/">홈</a>
             </li>
             <li className="relative group">
-              <a href="#">
-                부서
-              </a>
+              <a href="#">부서</a>
               {/* w-[단위] */}
               <ul>
                 <li className="m-2">
-                  <a href="/dept">
-                    부서조회
-                  </a>
+                  <a href="/dept">부서조회</a>
                 </li>
                 <li className="m-2">
-                  <a href="/add-dept">
-                    부서추가
-                  </a>
+                  <a href="/add-dept">부서추가</a>
                 </li>
               </ul>
             </li>
             <li className="relative group">
-              <a href="#">
-                사원
-              </a>
+              <a href="#">사원</a>
               <ul>
                 <li className="m-2">
-                  <a href="/emp">
-                    사원조회
+                  <a href="/emp">사원조회</a>
+                </li>
+                <li className="m-2">
+                  <a href="/add-emp">사원추가</a>
+                </li>
+              </ul>
+            </li>
+            <li className="relative group">
+              <a href="#" className="hover:underline">
+                FileDb
+              </a>
+              <ul className="drop-down-item">
+                <li className="m-2">
+                  <a href="/fileDb" className="hover:underline">
+                    FileDb 조회
                   </a>
                 </li>
                 <li className="m-2">
-                  <a href="/add-emp">
-                    사원추가
+                  <a href="/add-fileDb" className="hover:underline">
+                    FileDb 추가
                   </a>
                 </li>
               </ul>
@@ -141,24 +161,16 @@ export default function Navbar() {
           </ul>
           <ul className="flex flex-col gap-2 mt-2">
             <li>
-              <a href="#">
-                회원가입
-              </a>
+              <a href="#">회원가입</a>
             </li>
             <li>
-              <a href="#">
-                로그인
-              </a>
+              <a href="#">로그인</a>
             </li>
             <li>
-              <a href="#">
-                마이페이지
-              </a>
+              <a href="#">마이페이지</a>
             </li>
             <li>
-              <a href="#">
-                Logout
-              </a>
+              <a href="#">Logout</a>
             </li>
           </ul>
         </div>

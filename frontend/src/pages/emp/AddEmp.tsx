@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import EmpService from "../../services/EmpService";
-import type IEmp from "../../types/dept/IEmp";
+import type IEmp from "../../types/IEmp";
 import empValidation from "../../utils/empValidation";
 
 function AddEmp() {
@@ -9,7 +9,7 @@ function AddEmp() {
 
   const save = async (data: IEmp) => {
     try {
-      await EmpService.create(data);
+      await EmpService.insert(data);
       alert("저장되었습니다");
       nav("/emp");
     } catch (e) {
@@ -20,7 +20,6 @@ function AddEmp() {
 
   const formik = useFormik({
     initialValues: {
-      eno: null,
       ename: "",
       job: "",
       manager: "",

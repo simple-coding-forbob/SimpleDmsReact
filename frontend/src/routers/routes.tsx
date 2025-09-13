@@ -7,6 +7,8 @@ import DeptList from "../pages/dept/DeptList";
 import AddEmp from "../pages/emp/AddEmp";
 import EmpDetail from "../pages/emp/EmpDetail";
 import EmpList from "../pages/emp/EmpList";
+import AddFileDb from "../pages/filedb/AddFileDb";
+import FiledbList from "../pages/filedb/FiledbList";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +22,8 @@ const router = createBrowserRouter([
       { path: "emp", element: <EmpList /> },
       { path: "add-emp", element: <AddEmp /> },
       { path: "emp-detail/:eno", element: <EmpDetail /> },
+      { path: "fileDb", element: <FiledbList /> },
+      { path: "add-fileDb", element: <AddFileDb /> },
     ],
   },
 ]);

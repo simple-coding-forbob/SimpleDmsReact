@@ -1,6 +1,7 @@
 ﻿// axios 공통함수 : 벡엔드 연동
-import type ApiResponse from "../types/dept/ApiResponse";
-import type IDept from "../types/dept/IDept";
+
+import type ApiResponse from "../types/ApiResponse";
+import type IDept from "../types/IDept";
 import common from "./CommonService";
 
 // 전체 조회 + like 검색(paging 기능 : page(현재페이지), size(1페이지당개수))
@@ -14,7 +15,7 @@ const get = (dno:number | null) => {
 };
 
 // 저장함수
-const create = (data:IDept) => {
+const insert = (data:IDept) => {
   return common.post("/dept", data);
 };
 
@@ -31,7 +32,7 @@ const remove = (dno:number | null) => {
 const DeptService = {
   getAll,
   get,
-  create,
+  insert,
   update,
   remove,
 };

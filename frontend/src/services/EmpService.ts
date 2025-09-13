@@ -1,6 +1,7 @@
 ﻿// axios 공통함수 : 벡엔드 연동
-import type ApiResponse from "../types/dept/ApiResponse";
-import type IEmp from "../types/dept/IEmp";
+
+import type ApiResponse from "../types/ApiResponse";
+import type IEmp from "../types/IEmp";
 import common from "./CommonService";
 
 const getAll = (searchKeyword:string, page:number, size:number) => {
@@ -11,7 +12,7 @@ const get = (eno:number | null) => {
   return common.get<ApiResponse<IEmp>>(`/emp/${eno}`);
 };
 
-const create = (data:IEmp) => {
+const insert = (data:IEmp) => {
   return common.post("/emp", data);
 };
 
@@ -26,7 +27,7 @@ const remove = (eno:number | null) => {
 const EmpService = {
   getAll,
   get,
-  create,
+  insert,
   update,
   remove,
 };

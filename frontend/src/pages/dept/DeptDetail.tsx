@@ -2,7 +2,8 @@ import { useFormik } from "formik";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import DeptService from "../../services/DeptService";
-import type IDept from "../../types/dept/IDept";
+
+import type IDept from "../../types/IDept";
 import deptValidation from "../../utils/deptValidation";
 
 function DeptDetail() {

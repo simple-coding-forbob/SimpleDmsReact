@@ -47,22 +47,20 @@ public class EmpController {
 	// 저장
 	@Operation(summary = "사원 저장", description = "새로운 사원을 등록합니다.")
 	@PostMapping("/emp")
-	public ResponseEntity<ApiResponse<EmpDto>> create(@RequestBody EmpDto empDto) {
+	public ResponseEntity<Void> create(@RequestBody EmpDto empDto) {
 		empService.save(empDto);
-		ApiResponse<EmpDto> response = new ApiResponse<>(true, "저장 성공", null, 0, 0);
-		return ResponseEntity.ok(response);
+		return ResponseEntity.ok().build();
 	}
 
 	// 수정
 	@Operation(summary = "사원 수정", description = "사원을 수정합니다.")
 	@PutMapping("/emp/{eno}")
-	public ResponseEntity<ApiResponse<EmpDto>> update(
+	public ResponseEntity<Void> update(
 			@Parameter(description = "수정할 사원 번호") @PathVariable long eno,
 			@RequestBody EmpDto empDto) {
-
-		empService.save(empDto);
-		ApiResponse<EmpDto> response = new ApiResponse<>(true, "수정 성공", null, 0, 0);
-		return ResponseEntity.ok(response);
+        empDto.setEno(eno);
+		empService.updateFromDto(empDto);
+		return ResponseEntity.ok().build();
 	}
 
 	// 상세조회
@@ -79,9 +77,9 @@ public class EmpController {
 	// 삭제
 	@Operation(summary = "사원 삭제", description = "사원 번호로 삭제합니다.")
 	@DeleteMapping("/emp/{eno}")
-	public ResponseEntity<ApiResponse> delete(@PathVariable long eno) {
+	public ResponseEntity<Void> delete(@PathVariable long eno) {
 		empService.deleteById(eno);
-		ApiResponse response = new ApiResponse<>(true, "삭제 성공", null, 0, 0);
-		return ResponseEntity.ok(response);
+
+		return ResponseEntity.ok().build();
 	}
 }

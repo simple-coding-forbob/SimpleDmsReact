@@ -1,7 +1,8 @@
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
 import DeptService from "../../services/DeptService";
-import type IDept from "../../types/dept/IDept";
+
+import type IDept from "../../types/IDept";
 import deptValidation from "../../utils/deptValidation";
 
 function AddDept() {
@@ -9,7 +10,7 @@ function AddDept() {
 
   const save = async (data: IDept) => {
     try {
-      await DeptService.create(data);
+      await DeptService.insert(data);
       alert("저장되었습니다");
       nav("/dept");
     } catch (e) {

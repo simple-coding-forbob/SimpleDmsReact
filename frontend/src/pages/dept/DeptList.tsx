@@ -2,7 +2,8 @@ import Pagination from "rc-pagination";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import DeptService from "../../services/DeptService";
-import type IDept from "../../types/dept/IDept";
+import type IDept from "../../types/IDept";
+
 
 const DeptList = () => {
   const [depts, setDepts] = useState<IDept[]>([]);

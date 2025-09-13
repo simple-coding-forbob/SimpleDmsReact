@@ -1,34 +1,33 @@
-import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
 import EmpService from "../../services/EmpService";
-import empValidation from "../../utils/empValidation";
 import type IEmp from "../../types/dept/IEmp";
+import empValidation from "../../utils/empValidation";
 
 function AddEmp() {
-  const navigate = useNavigate();
+  const nav = useNavigate();
 
   const save = async (data: IEmp) => {
     try {
-      const response = await EmpService.create(data);
-      console.log(response.data);
-      alert("직원이 성공적으로 저장되었습니다!");
-      navigate("/emp");
+      await EmpService.create(data);
+      alert("저장되었습니다");
+      nav("/emp");
     } catch (e) {
       console.error(e);
-      alert("저장 중 오류가 발생했습니다.");
+      alert("오류 :" + e);
     }
   };
 
   const formik = useFormik({
     initialValues: {
-      eno:null,
+      eno: null,
       ename: "",
       job: "",
-      manager: null,
+      manager: "",
       hiredate: "",
-      salary: null,
-      commission: null,
-      dno: null,
+      salary: "",
+      commission: "",
+      dno: "",
     },
     validationSchema: empValidation,
     onSubmit: (data: IEmp) => {

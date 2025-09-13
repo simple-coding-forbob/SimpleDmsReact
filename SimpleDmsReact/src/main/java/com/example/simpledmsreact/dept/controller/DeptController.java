@@ -52,8 +52,7 @@ public class DeptController {
     @PostMapping("/dept")
     public ResponseEntity<ApiResponse<DeptDto>> create(@RequestBody DeptDto deptDto) {
         deptService.save(deptDto);
-        ApiResponse<DeptDto> response = new ApiResponse<>(true, "저장 성공", null, 0, 0);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok().build();
     }
 
     // 수정
@@ -64,8 +63,7 @@ public class DeptController {
             @Parameter(description = "수정할 부서 번호") @PathVariable int dno,
             @RequestBody DeptDto deptDto) {
         deptService.save(deptDto);
-        ApiResponse<DeptDto> response = new ApiResponse<>(true, "수정 성공", null, 0, 0);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok().build();
     }
 
     // 상세조회
@@ -84,8 +82,7 @@ public class DeptController {
     public ResponseEntity<ApiResponse> delete(@Parameter(description = "삭제할 부서 번호") @PathVariable int dno) {
         deptService.deleteById(dno);
 
-        ApiResponse response = new ApiResponse<>(true, "삭제 성공", null, 0, 0);
-        return ResponseEntity.ok(response);
+        return ResponseEntity.ok().build();
     }
 }
 

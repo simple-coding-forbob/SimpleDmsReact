@@ -1,8 +1,8 @@
+import Pagination from "rc-pagination";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import DeptService from "../../services/DeptService";
 import type IDept from "../../types/dept/IDept";
-import Pagination from "rc-pagination";
 
 const DeptList = () => {
   const [depts, setDepts] = useState<IDept[]>([]);
@@ -24,8 +24,8 @@ const DeptList = () => {
   const selectList = async () => {
     try {
       const response = await DeptService.getAll(searchKeyword, page - 1, size);
-      const { data, totalNumber } = response.data;
-      setDepts(data);
+      const { result, totalNumber } = response.data;
+      setDepts(result);
       setTotalNumber(totalNumber);
       console.log(response.data);
     } catch (e) {
@@ -63,21 +63,15 @@ const DeptList = () => {
             <tr>
               <th className="px-4 py-2 border-b">dname</th>
               <th className="px-4 py-2 border-b">loc</th>
-              <th className="px-4 py-2 border-b">actions</th>
             </tr>
           </thead>
           <tbody>
             {depts.map((data) => (
               <tr key={data.dno} className="hover:bg-gray-50">
-                <td className="px-4 py-2 border-b">{data.dname}</td>
-                <td className="px-4 py-2 border-b">{data.loc}</td>
                 <td className="px-4 py-2 border-b">
-                  <Link to={`/dept/${data.dno}`}>
-                    <span className="bg-green-500 text-white hover:bg-green-600 px-2 py-1 rounded">
-                      Edit
-                    </span>
-                  </Link>
+                  <Link to={`/dept-detail/${data.dno}`}>{data.dname}</Link>
                 </td>
+                <td className="px-4 py-2 border-b">{data.loc}</td>
               </tr>
             ))}
           </tbody>

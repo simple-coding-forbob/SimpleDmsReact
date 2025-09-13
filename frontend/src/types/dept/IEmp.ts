@@ -2,9 +2,9 @@
     eno?: number | null ,
     ename: string,
     job: string,
-    manager: number | null,
+    manager?: string | number,
     hiredate: string,
-    salary: number | null,
-    commission: number | null,
-    dno: number | null
+    salary?: string | number,
+    commission?: string | number | null,
+    dno?: string | number
 }

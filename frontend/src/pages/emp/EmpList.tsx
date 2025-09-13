@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-import { Link } from "react-router-dom";
 import Pagination from "rc-pagination";
+import { Link } from "react-router-dom";
 import EmpService from "../../services/EmpService";
 import type IEmp from "../../types/dept/IEmp";
 
@@ -25,8 +25,8 @@ const EmpList = () => {
   const selectList = () => {
     EmpService.getAll(searchKeyword, page - 1, size)
       .then((response) => {
-        const { data, totalNumber } = response.data;
-        setEmp(data);
+        const { result, totalNumber } = response.data;
+        setEmp(result);
         setTotalNumber(totalNumber);
         console.log(response.data);
       })
@@ -60,7 +60,7 @@ const EmpList = () => {
       <div>
         <table className="w-[100%] border border-gray-200">
           <thead className="bg-blue-500 text-white">
-            <tr>            
+            <tr>
               <th className="px-4 py-2 border-b">ename</th>
               <th className="px-4 py-2 border-b">job</th>
               <th className="px-4 py-2 border-b">manager</th>
@@ -68,26 +68,20 @@ const EmpList = () => {
               <th className="px-4 py-2 border-b">salary</th>
               <th className="px-4 py-2 border-b">commission</th>
               <th className="px-4 py-2 border-b">dno</th>
-              <th className="px-4 py-2 border-b">actions</th>
             </tr>
           </thead>
           <tbody>
             {emps.map((data) => (
               <tr key={data.eno} className="hover:bg-gray-50">
-                <td className="px-4 py-2 border-b">{data.ename}</td>
+                <td className="px-4 py-2 border-b">
+                  <Link to={`/emp-detail/${data.eno}`}>{data.ename}</Link>
+                </td>
                 <td className="px-4 py-2 border-b">{data.job}</td>
                 <td className="px-4 py-2 border-b">{data.manager}</td>
                 <td className="px-4 py-2 border-b">{data.hiredate}</td>
                 <td className="px-4 py-2 border-b">{data.salary}</td>
                 <td className="px-4 py-2 border-b">{data.commission}</td>
                 <td className="px-4 py-2 border-b">{data.dno}</td>
-                <td className="px-4 py-2 border-b">
-                  <Link to={`/emp/${data.eno}`}>
-                    <span className="bg-green-500 text-white hover:bg-green-600 px-2 py-1 rounded">
-                      수정
-                    </span>
-                  </Link>
-                </td>
               </tr>
             ))}
           </tbody>

@@ -1,21 +1,20 @@
-import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
 import DeptService from "../../services/DeptService";
-import deptValidation from "../../utils/deptValidation";
 import type IDept from "../../types/dept/IDept";
+import deptValidation from "../../utils/deptValidation";
 
 function AddDept() {
-  const navigate = useNavigate();
+  const nav = useNavigate();
 
   const save = async (data: IDept) => {
     try {
-      const response = await DeptService.create(data);
-      console.log(response.data);
-      alert("부서가 성공적으로 저장되었습니다!");
-      navigate("/dept");
+      await DeptService.create(data);
+      alert("저장되었습니다");
+      nav("/dept");
     } catch (e) {
       console.error(e);
-      alert("저장 중 오류가 발생했습니다.");
+      alert("오류 :"+e);
     }
   };
 
@@ -37,7 +36,7 @@ function AddDept() {
       <form onSubmit={formik.handleSubmit}>
         {/* dname 입력 */}
         <div className="mb-4">
-          <label htmlFor="dname" className="mb-1">
+          <label htmlFor="dname" className="block mb-1">
             dname
           </label>
           <input
@@ -57,7 +56,7 @@ function AddDept() {
 
         {/* loc 입력 */}
         <div className="mb-4">
-          <label htmlFor="loc" className="block font-medium mb-1">
+          <label htmlFor="loc" className="block mb-1">
             loc
           </label>
           <input
@@ -80,7 +79,7 @@ function AddDept() {
           type="submit"
           className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
         >
-          Submit
+          저장
         </button>
       </form>
     </>

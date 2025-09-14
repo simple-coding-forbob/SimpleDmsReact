@@ -1,15 +1,15 @@
 ﻿// axios 공통함수 : 벡엔드 연동
 
-import type ApiResponse from "../types/ApiResponse";
+import type IApiResponse from "../types/IApiResponse";
 import type IEmp from "../types/IEmp";
 import common from "./CommonService";
 
 const getAll = (searchKeyword:string, page:number, size:number) => {
-  return common.get<ApiResponse<IEmp[]>>(`/emp?searchKeyword=${searchKeyword}&page=${page}&size=${size}`);
+  return common.get<IApiResponse<IEmp[]>>(`/emp?searchKeyword=${searchKeyword}&page=${page}&size=${size}`);
 };
 
 const get = (eno:number | null) => {
-  return common.get<ApiResponse<IEmp>>(`/emp/${eno}`);
+  return common.get<IApiResponse<IEmp>>(`/emp/${eno}`);
 };
 
 const insert = (data:IEmp) => {

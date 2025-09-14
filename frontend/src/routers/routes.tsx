@@ -8,7 +8,9 @@ import AddEmp from "../pages/emp/AddEmp";
 import EmpDetail from "../pages/emp/EmpDetail";
 import EmpList from "../pages/emp/EmpList";
 import AddFileDb from "../pages/filedb/AddFileDb";
-import FiledbList from "../pages/filedb/FiledbList";
+import FiledbList from "../pages/filedb/FileDbList";
+import AddGallery from "../pages/gallery/AddGallery";
+import GalleryList from "../pages/gallery/GalleryList";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +26,8 @@ const router = createBrowserRouter([
       { path: "emp-detail/:eno", element: <EmpDetail /> },
       { path: "fileDb", element: <FiledbList /> },
       { path: "add-fileDb", element: <AddFileDb /> },
+      { path: "gallery", element: <GalleryList /> },
+      { path: "add-gallery", element: <AddGallery /> },
     ],
   },
 ]);

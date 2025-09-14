@@ -31,7 +31,7 @@ public class GalleryService {
     }
 
     //    TODO: 저장/수정 : save
-    public void save(GalleryDto galleryDto, byte[] fileData) {
+    public void save(GalleryDto galleryDto, byte[] galleryData) {
 //        TODO: 0) DTO 값 -> Entity 로 저장
         Gallery gallery=mapStruct.toEntity(galleryDto);
         // TODO 1) UUID 만들기(기본키): 자바에서 중복안되게 만들어주는 글자(랜덤)
@@ -41,7 +41,7 @@ public class GalleryService {
 //		        3) GalleryVO 에 위의 UUID, URL 저장(setter)
         gallery.setUuid(newUuid);
         gallery.setGalleryFileUrl(downloadURL);
-        gallery.setGalleryData(fileData);
+        gallery.setGalleryData(galleryData);
 //		        4) DB insert(galleryVO)
         galleryRepository.save(gallery);
     }
@@ -53,9 +53,9 @@ public class GalleryService {
 //		기본주소(ContextPath): http://localhost:8080
 //		URL 만드는 클래스      : ServletUriComponentsBuilder
         return ServletUriComponentsBuilder
-                .fromCurrentContextPath()     // 기본주소 : http://localhost:8080
-                .path("/gallery/download")  // 경로    : /gallery/download
-                .query("uuid="+uuid)          // 쿼리스트링: ?uuid=uuid값
+                .fromCurrentContextPath()    // 기본주소 : http://localhost:8080
+                .path("/api/gallery/download/{uuid}")    // 경로    : /gallery/download
+                .buildAndExpand(uuid)         // 파라메터방식: uuid
                 .toUriString();               // 위에꺼조합:
         // http://localhost:8080/gallery/download?uuid=uuid값
     }

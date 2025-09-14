@@ -1,6 +1,7 @@
 package com.example.simpledmsreact.gallery.controller;
 
 import com.example.simpledmsreact.common.ApiResponse;
+import com.example.simpledmsreact.filedb.dto.FileDbDto;
 import com.example.simpledmsreact.gallery.dto.GalleryDto;
 import com.example.simpledmsreact.gallery.entity.Gallery;
 import com.example.simpledmsreact.gallery.service.GalleryService;
@@ -19,6 +20,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @Log4j2
 @RestController
 @RequiredArgsConstructor
@@ -31,14 +34,20 @@ public class GalleryController {
     // 전체조회
     @Operation(summary = "갤러리 전체 조회", description = "검색 키워드와 페이징을 이용하여 갤러리 목록을 조회합니다.")
     @GetMapping("/gallery")
-    public ResponseEntity<ApiResponse<Page<GalleryDto>>> selectGalleryList(
+    public ResponseEntity<ApiResponse<List<GalleryDto>>> selectGalleryList(
             @Parameter(description = "검색 키워드") @RequestParam(defaultValue = "") String searchKeyword,
             @PageableDefault(page = 0, size = 3) Pageable pageable) {
 
         Page<GalleryDto> pages = galleryService.selectGalleryList(searchKeyword, pageable);
         log.info("Gallery Pages : " + pages);
 
-        ApiResponse<Page<GalleryDto>> response = new ApiResponse<>(true, "조회 성공", pages, pages.getNumber(), pages.getTotalElements());
+        ApiResponse<List<GalleryDto>> response = new ApiResponse<>(
+                true,
+                "조회 성공",
+                pages.getContent(),
+                pages.getNumber(),
+                pages.getTotalElements()
+        );
         return ResponseEntity.ok(response);
     }
 
@@ -47,11 +56,10 @@ public class GalleryController {
     @PostMapping("/gallery")
     public ResponseEntity<Void> insert(
             @Parameter(description = "갤러리 제목") @RequestParam(defaultValue = "") String galleryTitle,
-            @Parameter(description = "첨부 이미지 파일") @RequestParam(required = false) MultipartFile fileData) throws Exception {
+            @Parameter(description = "첨부 이미지 파일") @RequestParam(required = false) MultipartFile galleryData) throws Exception {
 
         GalleryDto galleryDto = new GalleryDto(galleryTitle);
-        byte[] data = (fileData != null) ? fileData.getBytes() : null;
-        galleryService.save(galleryDto, data);
+        galleryService.save(galleryDto, galleryData.getBytes());
 
         return ResponseEntity.ok().build();
     }

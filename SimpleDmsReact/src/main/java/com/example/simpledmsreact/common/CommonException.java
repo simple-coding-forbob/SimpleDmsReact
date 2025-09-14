@@ -12,8 +12,6 @@ import org.springframework.web.server.ResponseStatusException;
 @RequiredArgsConstructor
 public class CommonException {
 
-    private final ErrorMsg errorMsg;
-
     // ResponseStatusException 처리 (예: 404, 400 등)
     @ExceptionHandler(ResponseStatusException.class)
     public ResponseEntity<ApiResponse> handleResponseStatusException(ResponseStatusException e) {
@@ -29,10 +27,11 @@ public class CommonException {
     // 위에서 잡히지 않는 모든 예외 처리
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse> handleAllException(Exception e) {
-        log.error("예상치 못한 에러 발생", e);
+        log.error("벡엔드 서버 오류가 발생했습니다.", e);
 
         ApiResponse response = new ApiResponse<>();
         response.setSuccess(false);
+//        response.setMessage(e.getMessage() != null ? e.getMessage() : "벡엔드 서버 오류가 발생했습니다.");
         response.setMessage(e.getMessage());
 
         return ResponseEntity.status(500).body(response);

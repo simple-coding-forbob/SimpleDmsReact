@@ -1,5 +1,5 @@
 ﻿
-export default interface ApiResponse<T> {
+export default interface IApiResponse<T> {
   success: boolean,
   message: string,
   result: T,

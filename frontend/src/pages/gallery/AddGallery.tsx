@@ -1,19 +1,18 @@
 import { useFormik } from "formik";
 import type { ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
-import FileDbService from "../../services/FileDbService";
+import GalleryService from "../../services/GalleryService";
+import type IGallery from "../../types/IGallery";
+import galleryValidation from "../../utils/galleryValidation";
 
-import type IFileDb from "../../types/IFileDb";
-import fileDbValidation from "../../utils/fileDbValidation";
-
-function AddFileDb() {
+function AddGallery() {
   const nav = useNavigate();
 
-  const insert = async (data: IFileDb) => {
+  const insert = async (data: IGallery) => {
     try {
-      await FileDbService.insert(data);
+      await GalleryService.insert(data);
       alert("저장되었습니다");
-      nav("/fileDb"); // 업로드 성공 시 강제 이동
+      nav("/gallery"); // 업로드 성공 시 강제 이동
     } catch (e) {
       console.error(e);
       alert("오류가 발생했습니다.");
@@ -22,11 +21,10 @@ function AddFileDb() {
 
   const formik = useFormik({
     initialValues: {
-      fileTitle: "",
-      fileContent: "",
-      fileData: null as File | null
+      galleryTitle: "",
+      galleryData: null as File | null,
     },
-    validationSchema: fileDbValidation,
+    validationSchema: galleryValidation,
     onSubmit: (values) => {
       insert(values);
     },
@@ -34,7 +32,7 @@ function AddFileDb() {
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.currentTarget.files?.[0] ?? null;
-    formik.setFieldValue("fileData", file);
+    formik.setFieldValue("galleryData", file);
   };
 
   return (
@@ -44,41 +42,21 @@ function AddFileDb() {
       <form onSubmit={formik.handleSubmit}>
         {/* 이미지명 */}
         <div className="mb-4">
-          <label htmlFor="fileTitle" className="block mb-1">
+          <label htmlFor="galleryTitle" className="block mb-1">
             이미지명
           </label>
           <input
             type="text"
-            id="fileTitle"
-            name="fileTitle"
+            id="galleryTitle"
+            name="galleryTitle"
             placeholder="이미지명"
             className="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring focus:ring-blue-500"
-            value={formik.values.fileTitle}
+            value={formik.values.galleryTitle}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
-          {formik.touched.fileTitle && formik.errors.fileTitle && (
-            <div className="text-red-500">{formik.errors.fileTitle}</div>
-          )}
-        </div>
-
-        {/* 이미지내용 */}
-        <div className="mb-4">
-          <label htmlFor="fileContent" className="block mb-1">
-            내용
-          </label>
-          <input
-            type="text"
-            id="fileContent"
-            name="fileContent"
-            placeholder="내용"
-            className="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring focus:ring-blue-500"
-            value={formik.values.fileContent}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
-          {formik.touched.fileContent && formik.errors.fileContent && (
-            <div className="text-red-500">{formik.errors.fileContent}</div>
+          {formik.touched.galleryTitle && formik.errors.galleryTitle && (
+            <div className="text-red-500">{formik.errors.galleryTitle}</div>
           )}
         </div>
 
@@ -90,15 +68,15 @@ function AddFileDb() {
               파일 선택
               <input
                 type="file"
-                name="fileData"
+                name="galleryData"
                 onChange={handleFileChange}
                 className="hidden"
               />
             </label>
-            <span>{formik.values.fileData?.name ?? "선택된 파일 없음"}</span>
+            <span>{formik.values.galleryData?.name ?? "선택된 파일 없음"}</span>
           </div>
-          {formik.errors.fileData && (
-            <div className="text-red-500 mt-1">{formik.errors.fileData}</div>
+          {formik.errors.galleryData && (
+            <div className="text-red-500 mt-1">{formik.errors.galleryData}</div>
           )}
         </div>
 
@@ -114,4 +92,4 @@ function AddFileDb() {
   );
 }
 
-export default AddFileDb;
+export default AddGallery;

@@ -1,17 +1,17 @@
-﻿// axios 공통함수 : 벡엔드 연동
+﻿// axios 공통함수 : 벡엔드 연동IApiResponse
 
-import type ApiResponse from "../types/ApiResponse";
+import type IApiResponse from "../types/IApiResponse";
 import type IDept from "../types/IDept";
 import common from "./CommonService";
 
 // 전체 조회 + like 검색(paging 기능 : page(현재페이지), size(1페이지당개수))
 const getAll = (searchKeyword:string, page:number, size:number) => {
-  return common.get<ApiResponse<IDept[]>>(`/dept?searchKeyword=${searchKeyword}&page=${page}&size=${size}`);
+  return common.get<IApiResponse<IDept[]>>(`/dept?searchKeyword=${searchKeyword}&page=${page}&size=${size}`);
 };
 
 // 상세 조회
 const get = (dno:number | null) => {
-  return common.get<ApiResponse<IDept>>(`/dept/${dno}`);
+  return common.get<IApiResponse<IDept>>(`/dept/${dno}`);
 };
 
 // 저장함수

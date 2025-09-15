@@ -11,6 +11,9 @@ import AddFileDb from "../pages/filedb/AddFileDb";
 import FiledbList from "../pages/filedb/FileDbList";
 import AddGallery from "../pages/gallery/AddGallery";
 import GalleryList from "../pages/gallery/GalleryList";
+import FaqList from "../pages/faq/FaqList";
+import AddFaq from "../pages/faq/AddFaq";
+import FaqDetail from "../pages/faq/FaqDetail";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +27,9 @@ const router = createBrowserRouter([
       { path: "emp", element: <EmpList /> },
       { path: "add-emp", element: <AddEmp /> },
       { path: "emp-detail/:eno", element: <EmpDetail /> },
+      { path: "faq", element: <FaqList /> },
+      { path: "add-faq", element: <AddFaq /> },
+      { path: "faq-detail/:fno", element: <FaqDetail /> },
       { path: "fileDb", element: <FiledbList /> },
       { path: "add-fileDb", element: <AddFileDb /> },
       { path: "gallery", element: <GalleryList /> },

@@ -11,6 +11,8 @@ import com.example.simpledmsreact.filedb.dto.FileDbDto;
 import com.example.simpledmsreact.filedb.entity.FileDb;
 import com.example.simpledmsreact.gallery.dto.GalleryDto;
 import com.example.simpledmsreact.gallery.entity.Gallery;
+import com.example.simpledmsreact.qna.dto.QnaDto;
+import com.example.simpledmsreact.qna.entity.Qna;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
@@ -43,12 +45,18 @@ public interface MapStruct {
     // TODO: 수정 시 사용: dirty checking 기능(save() 없이 수정 가능)
     void updateFromDto(FaqDto faqDto, @MappingTarget Faq faq);
 
-    //    TODO: 4) fileDb <-> fileDto
+    // TODO: 4) Dept <-> DeptDto
+    QnaDto toDto(Qna qna);
+    Qna toEntity(QnaDto qnaDto);
+    // TODO: 수정 시 사용: dirty checking 기능(save() 없이 수정 가능)
+    void updateFromDto(QnaDto qnaDto, @MappingTarget Qna qna);
+
+    //    TODO: 5) fileDb <-> fileDto
     FileDbDto toDto(FileDb fileDb);
     @Mapping(target = "fileData", ignore = true)
     FileDb toEntity(FileDbDto fileDbDto);
 
-    //    TODO: 5) gallery <-> galleryDto
+    //    TODO: 6) gallery <-> galleryDto
     GalleryDto toDto(Gallery gallery);
     @Mapping(target = "galleryData", ignore = true)
     Gallery toEntity(GalleryDto galleryDto);

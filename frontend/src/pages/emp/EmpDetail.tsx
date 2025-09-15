@@ -15,10 +15,10 @@ function EmpDetail() {
 
   // 상세조회
   useEffect(() => {
-    if (eno) getEmp(eno);
+    if (eno) get(eno);
   }, [eno]);
 
-  const getEmp = async (eno: number) => {
+  const get = async (eno: number) => {
     try {
       const response = await EmpService.get(eno);
       const { result } = response.data;

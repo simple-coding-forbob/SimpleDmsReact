@@ -4,6 +4,8 @@ import com.example.simpledmsreact.common.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
+
 @Entity
 @Table(name = "TB_NOTICE")
 @SequenceGenerator(
@@ -18,6 +20,7 @@ import lombok.*;
 @ToString
 @EqualsAndHashCode(of = "nid", callSuper = false)
 public class Notice extends BaseTimeEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE
             , generator = "SQ_NOTICE_JPA"
@@ -27,4 +30,6 @@ public class Notice extends BaseTimeEntity {
     private String content;
     private String author;
     private String isVisible;    // 기본 N
+    private LocalDate startDate;
+    private LocalDate endDate;
 }

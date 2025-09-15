@@ -1,0 +1,30 @@
+package com.example.simpledmsreact.notice.entity;
+
+import com.example.simpledmsreact.common.BaseTimeEntity;
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name = "TB_NOTICE")
+@SequenceGenerator(
+        name = "SQ_NOTICE_JPA",
+        sequenceName = "SQ_NOTICE",
+        allocationSize = 1
+)
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@EqualsAndHashCode(of = "nid", callSuper = false)
+public class Notice extends BaseTimeEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE
+            , generator = "SQ_NOTICE_JPA"
+    )
+    private Long nid;            // 기본키, 시퀀스
+    private String title;
+    private String content;
+    private String author;
+    private String isVisible;    // 기본 N
+}

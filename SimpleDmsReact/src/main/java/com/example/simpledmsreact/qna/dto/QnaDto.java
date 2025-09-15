@@ -11,6 +11,6 @@ public class QnaDto {
     private Long qno;
     private String questioner;
     private String question;
-    private String answer;
     private String answerer;
+    private String answer;
 }

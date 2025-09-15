@@ -14,6 +14,9 @@ import GalleryList from "../pages/gallery/GalleryList";
 import FaqList from "../pages/faq/FaqList";
 import AddFaq from "../pages/faq/AddFaq";
 import FaqDetail from "../pages/faq/FaqDetail";
+import QnaList from "../pages/qna/QnaList";
+import AddQna from "../pages/qna/AddQna";
+import QnaDetail from "../pages/qna/QnaDetail";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +33,9 @@ const router = createBrowserRouter([
       { path: "faq", element: <FaqList /> },
       { path: "add-faq", element: <AddFaq /> },
       { path: "faq-detail/:fno", element: <FaqDetail /> },
+      { path: "qna", element: <QnaList /> },
+      { path: "add-qna", element: <AddQna /> },
+      { path: "qna-detail/:qno", element: <QnaDetail /> },
       { path: "fileDb", element: <FiledbList /> },
       { path: "add-fileDb", element: <AddFileDb /> },
       { path: "gallery", element: <GalleryList /> },

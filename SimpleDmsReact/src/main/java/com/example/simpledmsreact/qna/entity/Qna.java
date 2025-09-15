@@ -1,0 +1,30 @@
+package com.example.simpledmsreact.qna.entity;
+
+import com.example.simpledmsreact.common.BaseTimeEntity;
+import jakarta.persistence.*;
+import lombok.*;
+
+@Entity
+@Table(name = "TB_QNA")
+@SequenceGenerator(
+        name = "SQ_QNA_JPA",
+        sequenceName = "SQ_QNA",
+        allocationSize = 1
+)
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@EqualsAndHashCode(of = "qno", callSuper = false)
+public class Qna extends BaseTimeEntity {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE
+            , generator = "SQ_QNA_JPA"
+    )
+    private Long qno;
+    private String questioner;
+    private String question;
+    private String answer;
+    private String answerer;
+}

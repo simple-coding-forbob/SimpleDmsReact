@@ -15,10 +15,10 @@ function DeptDetail() {
 
   // 상세조회
   useEffect(() => {
-    if (dno) getDept(dno);
+    if (dno) get(dno);
   }, [dno]);
 
-  const getDept = async (dno: number) => {
+  const get = async (dno: number) => {
     try {
       const response = await DeptService.get(dno);
       const { result } = response.data;

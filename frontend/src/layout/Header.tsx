@@ -1,6 +1,7 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
-export default function Navbar() {
+export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -42,75 +43,89 @@ export default function Navbar() {
         >
           {/* PC 메뉴 */}
           <li>
-            <a href="/">홈</a>
+            <Link to="/">홈</Link>
           </li>
           <li></li>
           <li className="group md:relative">
-            <a href="#">부서</a>
+            <Link to="#">부서</Link>
             {/* w-[단위] */}
             <ul
               className="md:absolute md:top-full md:left-0 md:opacity-0 md:invisible md:group-hover:opacity-100 
             md:group-hover:visible md:transition-all md:bg-white md:text-black md:w-32 md:p-2 md:rounded"
             >
               <li className="m-2">
-                <a href="/dept">부서조회</a>
+                <Link to="/dept">부서조회</Link>
               </li>
               <li className="m-2">
-                <a href="/add-dept">부서추가</a>
+                <Link to="/add-dept">부서추가</Link>
               </li>
             </ul>
           </li>
           <li className="group md:relative">
-            <a href="#">사원</a>
+            <Link to="#">사원</Link>
             <ul
               className="md:absolute md:top-full md:left-0 md:opacity-0 md:invisible md:group-hover:opacity-100 
             md:group-hover:visible md:transition-all md:bg-white md:text-black md:w-32 md:p-2 md:rounded"
             >
               <li className="m-2">
-                <a href="/emp">사원조회</a>
+                <Link to="/emp">사원조회</Link>
               </li>
               <li className="m-2">
-                <a href="/add-emp">사원추가</a>
+                <Link to="/add-emp">사원추가</Link>
               </li>
             </ul>
           </li>
           <li className="group md:relative">
-            <a href="#" className="hover:underline">
+            <Link to="#">Faq</Link>
+            <ul
+              className="md:absolute md:top-full md:left-0 md:opacity-0 md:invisible md:group-hover:opacity-100 
+            md:group-hover:visible md:transition-all md:bg-white md:text-black md:w-32 md:p-2 md:rounded"
+            >
+              <li className="m-2">
+                <Link to="/faq">Faq조회</Link>
+              </li>
+              <li className="m-2">
+                <Link to="/add-faq">Faq추가</Link>
+              </li>
+            </ul>
+          </li>
+          <li className="group md:relative">
+            <Link to="#" className="hover:underline">
               FileDb
-            </a>
+            </Link>
             <ul
               className="md:absolute md:top-full md:left-0 md:opacity-0 md:invisible md:group-hover:opacity-100 
             md:group-hover:visible md:transition-all md:bg-white md:text-black md:w-32 md:p-2 md:rounded"
             >
               <li className="m-2">
-                <a href="/fileDb" className="hover:underline">
+                <Link to="/fileDb" className="hover:underline">
                   FileDb 조회
-                </a>
+                </Link>
               </li>
               <li className="m-2">
-                <a href="/add-fileDb" className="hover:underline">
+                <Link to="/add-fileDb" className="hover:underline">
                   FileDb 추가
-                </a>
+                </Link>
               </li>
             </ul>
           </li>
           <li className="group md:relative">
-            <a href="#" className="hover:underline">
+            <Link to="#" className="hover:underline">
               Gallery
-            </a>
+            </Link>
             <ul
               className="md:absolute md:top-full md:left-0 md:opacity-0 md:invisible md:group-hover:opacity-100 
             md:group-hover:visible md:transition-all md:bg-white md:text-black md:w-32 md:p-2 md:rounded"
             >
               <li className="m-2">
-                <a href="/gallery" className="hover:underline">
+                <Link to="/gallery" className="hover:underline">
                   Gallery 조회
-                </a>
+                </Link>
               </li>
               <li className="m-2">
-                <a href="/add-gallery" className="hover:underline">
+                <Link to="/add-gallery" className="hover:underline">
                   Gallery 추가
-                </a>
+                </Link>
               </li>
             </ul>
           </li>
@@ -120,16 +135,16 @@ export default function Navbar() {
                                md:flex-row"
         >
           <li>
-            <a href="#">회원가입</a>
+            <Link to="#">회원가입</Link>
           </li>
           <li>
-            <a href="#">로그인</a>
+            <Link to="#">로그인</Link>
           </li>
           <li>
-            <a href="#">마이페이지</a>
+            <Link to="#">마이페이지</Link>
           </li>
           <li>
-            <a href="#">Logout</a>
+            <Link to="#">Logout</Link>
           </li>
         </ul>
       </div>

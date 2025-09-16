@@ -17,6 +17,12 @@ import FaqDetail from "../pages/faq/FaqDetail";
 import QnaList from "../pages/qna/QnaList";
 import AddQna from "../pages/qna/AddQna";
 import QnaDetail from "../pages/qna/QnaDetail";
+import NoticeList from "../pages/notice/NoticeList";
+import NoticeDetail from "../pages/notice/NoticeDetail";
+import AddNotice from "../pages/notice/AddNotice";
+import EventNoticeList from "../pages/eventnotice/EventNoticeList";
+import AddEventNotice from "../pages/eventnotice/AddEventNotice";
+import EventNoticeDetail from "../pages/eventnotice/EventNoticeDetail";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +42,12 @@ const router = createBrowserRouter([
       { path: "qna", element: <QnaList /> },
       { path: "add-qna", element: <AddQna /> },
       { path: "qna-detail/:qno", element: <QnaDetail /> },
+      { path: "notice", element: <NoticeList /> },
+      { path: "add-notice", element: <AddNotice /> },
+      { path: "notice-detail/:nid", element: <NoticeDetail /> },
+      { path: "event-notice", element: <EventNoticeList /> },
+      { path: "add-event-notice", element: <AddEventNotice /> },
+      { path: "event-notice-detail/:nid", element: <EventNoticeDetail /> },
       { path: "fileDb", element: <FiledbList /> },
       { path: "add-fileDb", element: <AddFileDb /> },
       { path: "gallery", element: <GalleryList /> },

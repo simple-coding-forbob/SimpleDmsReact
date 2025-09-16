@@ -1,4 +1,4 @@
-package com.example.simpledmsreact.notice.entity;
+package com.example.simpledmsreact.eventnotice.entity;
 
 import com.example.simpledmsreact.common.BaseTimeEntity;
 import jakarta.persistence.*;
@@ -7,10 +7,10 @@ import lombok.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "TB_NOTICE")
+@Table(name = "TB_EVENT_NOTICE")
 @SequenceGenerator(
-        name = "SQ_NOTICE_JPA",
-        sequenceName = "SQ_NOTICE",
+        name = "SQ_EVENT_NOTICE_JPA",
+        sequenceName = "SQ_EVENT_NOTICE",
         allocationSize = 1
 )
 @Getter
@@ -19,15 +19,15 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode(of = "nid", callSuper = false)
-public class Notice extends BaseTimeEntity {
+public class EventNotice extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE
-            , generator = "SQ_NOTICE_JPA"
+            , generator = "SQ_EVENT_NOTICE_JPA"
     )
-    private Long nid;            // 기본키, 시퀀스
-    private String title;
-    private String content;
+    private Long eid;            // 기본키, 시퀀스
+    private String subject;
+    private String text;
     private String isVisible;    // 기본 N
     private LocalDate startDate;
     private LocalDate endDate;

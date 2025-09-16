@@ -32,7 +32,7 @@ function AddFaq() {
 
   return (
     <>
-      <h1 className="text-2xl font-bold mb-6">부서 추가</h1>
+      <h1 className="text-2xl font-bold mb-6">Faq 추가</h1>
 
       <form onSubmit={formik.handleSubmit}>
         {/* title 입력 */}

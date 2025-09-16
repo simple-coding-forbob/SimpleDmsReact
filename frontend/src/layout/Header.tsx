@@ -104,6 +104,34 @@ export default function Header() {
             </ul>
           </li>
           <li className="group md:relative">
+            <Link to="#">Notice</Link>
+            <ul
+              className="md:absolute md:top-full md:left-0 md:opacity-0 md:invisible md:group-hover:opacity-100 
+            md:group-hover:visible md:transition-all md:bg-white md:text-black md:w-32 md:p-2 md:rounded"
+            >
+              <li className="m-2">
+                <Link to="/notice">Notice조회</Link>
+              </li>
+              <li className="m-2">
+                <Link to="/add-notice">Notice추가</Link>
+              </li>
+            </ul>
+          </li>
+          <li className="group md:relative">
+            <Link to="#">EventNotice</Link>
+            <ul
+              className="md:absolute md:top-full md:left-0 md:opacity-0 md:invisible md:group-hover:opacity-100 
+            md:group-hover:visible md:transition-all md:bg-white md:text-black md:w-32 md:p-2 md:rounded"
+            >
+              <li className="m-2">
+                <Link to="/event-notice">EventNotice 조회</Link>
+              </li>
+              <li className="m-2">
+                <Link to="/add-event-notice">EventNotice 추가</Link>
+              </li>
+            </ul>
+          </li>
+          <li className="group md:relative">
             <Link to="#" className="hover:underline">
               FileDb
             </Link>

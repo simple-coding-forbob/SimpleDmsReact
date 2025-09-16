@@ -1,6 +1,6 @@
-package com.example.simpledmsreact.notice.repository;
+package com.example.simpledmsreact.eventnotice.repository;
 
-import com.example.simpledmsreact.notice.entity.Notice;
+import com.example.simpledmsreact.eventnotice.entity.EventNotice;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -9,10 +9,10 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface NoticeRepository extends JpaRepository<Notice, Long> {
-    @Query(value = "select n from Notice n\n" +
-            "where n.title like %:searchKeyword%")
-    Page<Notice> selectNoticeList(
+public interface EventNoticeRepository extends JpaRepository<EventNotice, Long> {
+    @Query(value = "select n from EventNotice n\n" +
+            "where n.subject like %:searchKeyword%")
+    Page<EventNotice> selectEventNoticeList(
             @Param("searchKeyword") String searchKeyword,
             Pageable pageable
     );

@@ -39,7 +39,7 @@ const QnaList = () => {
 
   return (
     <>
-      <h1 className="text-2xl font-bold mb-6">부서 조회</h1>
+      <h1 className="text-2xl font-bold mb-6">Qna 조회</h1>
 
       <div className="flex justify-center mb-4">
         <input

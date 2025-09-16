@@ -1,4 +1,4 @@
-package com.example.simpledmsreact.notice.dto;
+package com.example.simpledmsreact.eventnotice.dto;
 
 import lombok.*;
 
@@ -9,10 +9,10 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class NoticeDto {
-    private Long nid;            // 기본키, 시퀀스
-    private String title;
-    private String content;
+public class EventNoticeDto {
+    private Long eid;            // 기본키, 시퀀스
+    private String subject;
+    private String text;
     private String isVisible;    // 기본 N
     private LocalDate startDate;
     private LocalDate endDate;

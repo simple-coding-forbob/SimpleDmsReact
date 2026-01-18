@@ -1,9 +1,11 @@
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
+import { Meta } from "react-head";
 import { useNavigate, useParams } from "react-router-dom";
-import type IEventNotice from "../../types/IEventNotice";
-import eventNoticeValidation from "../../utils/eventNoticeValidation";
+import messages from "../../common/messages";
 import EventNoticeService from "../../services/EventNoticeService";
+import type IEventNotice from "../../types/IEventNotice";
+import eventNoticeValidation from "../../validation/eventNoticeValidation";
 
 function EventNoticeDetail() {
   const params = useParams<{ eid: string }>();
@@ -18,38 +20,24 @@ function EventNoticeDetail() {
   }, [eid]);
 
   const get = async (eid: number) => {
-    try {
-      const response = await EventNoticeService.get(eid);
-      const { result } = response.data;
-      setEventNotice(result); // 서버 데이터 저장
-      console.log(result);
-    } catch (e) {
-      console.error(e);
-    }
+    const response = await EventNoticeService.get(eid);
+    const { result } = response.data;
+    setEventNotice(result); // 서버 데이터 저장
+    console.log(result);
   };
 
   // 수정
   const update = async (data: IEventNotice) => {
-    try {
-      await EventNoticeService.update(eid, data);
-      alert("수정되었습니다");
-      nav("/event-notice");
-    } catch (e) {
-      console.error(e);
-      alert("오류: " + e);
-    }
+    await EventNoticeService.update(eid, data);
+    alert(messages.update);
+    nav("/event-notice");
   };
 
   // 삭제
   const remove = async () => {
-    try {
-      await EventNoticeService.remove(eid);
-      alert("삭제되었습니다");
-      nav("/event-notice");
-    } catch (e) {
-      console.error(e);
-      alert("오류: " + e);
-    }
+    await EventNoticeService.remove(eid);
+    alert(messages.delete);
+    nav("/event-notice");
   };
 
   // 서버 데이터가 준비되었을 때만 Formik 초기화
@@ -70,17 +58,18 @@ function EventNoticeDetail() {
 
   return (
     <>
+      <Meta name="description" content="공지사항 상세조회 페이지입니다." />
       <h1 className="text-2xl font-bold mb-6">공지사항 상세조회</h1>
 
       <form onSubmit={formik.handleSubmit}>
         <div className="mb-4">
-          <label htmlFor="title" className="block mb-1">
-            title
+          <label htmlFor="subject" className="block mb-1">
+            subject
           </label>
           <input
             type="text"
-            id="title"
-            name="title"
+            id="subject"
+            name="subject"
             className="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring focus:ring-blue-500"
             value={formik.values.subject}
             onChange={formik.handleChange}
@@ -92,13 +81,13 @@ function EventNoticeDetail() {
         </div>
 
         <div className="mb-4">
-          <label htmlFor="content" className="block mb-1">
+          <label htmlFor="text" className="block mb-1">
             content
           </label>
           <input
             type="text"
-            id="content"
-            name="content"
+            id="text"
+            name="text"
             className="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring focus:ring-blue-500"
             value={formik.values.text}
             onChange={formik.handleChange}
@@ -140,7 +129,7 @@ function EventNoticeDetail() {
             id="startDate"
             name="startDate"
             className="w-full border border-gray-300 rounded p-2"
-            value={formik.values.startDate??""}
+            value={formik.values.startDate}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
@@ -156,7 +145,7 @@ function EventNoticeDetail() {
             id="endDate"
             name="endDate"
             className="w-full border border-gray-300 rounded p-2"
-            value={formik.values.endDate??""}
+            value={formik.values.endDate}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />

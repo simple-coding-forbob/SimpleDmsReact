@@ -1,21 +1,18 @@
 import { useFormik } from "formik";
+import { Meta } from "react-head";
 import { useNavigate } from "react-router-dom";
+import messages from "../../common/messages";
 import NoticeService from "../../services/NoticeService";
 import type INotice from "../../types/INotice";
-import noticeValidation from "../../utils/noticeValidation";
+import noticeValidation from "../../validation/noticeValidation";
 
 function AddNotice() {
   const nav = useNavigate();
 
   const save = async (data: INotice) => {
-    try {
-      await NoticeService.insert(data);
-      alert("저장되었습니다");
-      nav("/notice");
-    } catch (e) {
-      console.error(e);
-      alert("오류 :" + e);
-    }
+    await NoticeService.insert(data);
+    alert(messages.save);
+    nav("/notice");
   };
 
   const formik = useFormik({
@@ -23,8 +20,8 @@ function AddNotice() {
       title: "",
       content: "",
       isVisible: "N", // 기본값을 'N'으로 설정
-      startDate: null,
-      endDate: null,
+      startDate: "",
+      endDate: "",
     },
     validationSchema: noticeValidation,
     onSubmit: (data: INotice) => {
@@ -34,6 +31,7 @@ function AddNotice() {
 
   return (
     <>
+      <Meta name="description" content="공지사항 추가 페이지입니다." />
       <h1 className="text-2xl font-bold mb-6">공지사항 추가</h1>
 
       <form onSubmit={formik.handleSubmit}>
@@ -107,7 +105,7 @@ function AddNotice() {
             id="startDate"
             name="startDate"
             className="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring focus:ring-blue-500"
-            value={formik.values.startDate??""}
+            value={formik.values.startDate}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
@@ -126,7 +124,7 @@ function AddNotice() {
             id="endDate"
             name="endDate"
             className="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring focus:ring-blue-500"
-            value={formik.values.endDate??""}
+            value={formik.values.endDate}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
@@ -137,7 +135,7 @@ function AddNotice() {
         {/* 버튼 */}
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+          className="w-full bg-blue-700 text-white p-2 rounded hover:bg-blue-800"
         >
           저장
         </button>

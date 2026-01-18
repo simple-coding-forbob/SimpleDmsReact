@@ -1,28 +1,16 @@
 package com.simplecoding.simpledmsreact.common;
 
-import com.simplecoding.simpledmsreact.auth.dto.SecurityUserDto;
-import com.simplecoding.simpledmsreact.common.dto.PdfDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.file.*;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 
 @Component
@@ -93,39 +81,5 @@ public class CommonUtil {
                 .buildAndExpand(uuid)                   // 파라메터방식: uuid 값넣기
                 .toUriString();                         // 위에꺼조합:
 
-    }
-
-//    서버에서 로그인 유저 꺼내기(만약 로그인 했다면)
-    public SecurityUserDto getLoginUser() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-        // 인증 객체가 없거나 인증 안 된 경우
-        if (authentication == null || !authentication.isAuthenticated()) {
-            throw new RuntimeException(getMessage("errors.unauthorized"));
-        }
-
-        Object principal = authentication.getPrincipal();
-
-        // principal 이 SecurityUserDto 인 경우만 반환
-        if (principal instanceof SecurityUserDto user) {
-            return user;
-        } else {
-            throw new RuntimeException(getMessage("errors.unauthorized"));
-        }
-    }
-
-//    pdf 만들기
-    public byte[] generatePdf(String templatePath, PdfDto pdfDto) throws Exception {
-        Path path = Paths.get(templatePath);                                                                // 1. JasperReports 템플릿 로딩 (.jasper)
-        if (!Files.exists(path)) {
-            throw new RuntimeException(getMessage("errors.path.not.found"));
-        }
-
-//        TODO: try - with - resources 로 에러나더라도 무조건 자동 close() 함수 실행됨
-        try(InputStream inputStream = new FileInputStream(path.toFile())) {
-            JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(List.of(pdfDto));           // 2. 단일 객체라도 Collection으로 감싸기
-            JasperPrint jasperPrint = JasperFillManager.fillReport(inputStream, new HashMap<>(), dataSource);  // 3. PDF 생성
-            return JasperExportManager.exportReportToPdf(jasperPrint);
-        }
     }
 }

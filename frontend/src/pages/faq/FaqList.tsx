@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import type IFaq from "../../types/IFaq";
 import FaqService from "../../services/FaqService";
+import { Meta } from "react-head";
 
 const FaqList = () => {
   const [faqs, setFaqs] = useState<IFaq[]>([]);
@@ -22,15 +23,11 @@ const FaqList = () => {
   };
 
   const selectList = async () => {
-    try {
-      const response = await FaqService.getAll(searchKeyword, page - 1, size);
-      const { result, totalNumber } = response.data;
-      setFaqs(result);
-      setTotalNumber(totalNumber);
-      console.log(response.data);
-    } catch (e) {
-      console.log(e);
-    }
+    const response = await FaqService.getAll(searchKeyword, page - 1, size);
+    const { result, totalNumber } = response.data;
+    setFaqs(result);
+    setTotalNumber(totalNumber);
+    console.log(response.data);
   };
 
   useEffect(() => {
@@ -39,6 +36,7 @@ const FaqList = () => {
 
   return (
     <>
+      <Meta name="description" content="Faq 조회 페이지입니다." />
       <h1 className="text-2xl font-bold mb-6">Faq 조회</h1>
 
       <div className="flex justify-center mb-4">
@@ -50,16 +48,16 @@ const FaqList = () => {
           onChange={onChangeSearchKeyword}
         />
         <button
-          className="bg-blue-500 text-white hover:bg-blue-600 px-4 py-2 rounded-r"
+          className="bg-blue-700 text-white hover:bg-blue-800 px-4 py-2 rounded-r min-w-[5rem]"
           onClick={selectList}
         >
-          Search
+          검색
         </button>
       </div>
 
       <div>
         <table className="w-[100%] border border-gray-200">
-          <thead className="bg-blue-500 text-white">
+          <thead className="bg-blue-700 text-white">
             <tr>
               <th className="px-4 py-2 border-b">title</th>
               <th className="px-4 py-2 border-b">content</th>

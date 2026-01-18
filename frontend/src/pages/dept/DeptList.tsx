@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import DeptService from "../../services/DeptService";
 import type IDept from "../../types/IDept";
-
+import { Meta } from "react-head";
 
 const DeptList = () => {
   const [depts, setDepts] = useState<IDept[]>([]);
@@ -23,15 +23,11 @@ const DeptList = () => {
   };
 
   const selectList = async () => {
-    try {
-      const response = await DeptService.getAll(searchKeyword, page - 1, size);
-      const { result, totalNumber } = response.data;
-      setDepts(result);
-      setTotalNumber(totalNumber);
-      console.log(response.data);
-    } catch (e) {
-      console.log(e);
-    }
+    const response = await DeptService.getAll(searchKeyword, page - 1, size);
+    const { result, totalNumber } = response.data;
+    setDepts(result);
+    setTotalNumber(totalNumber);
+    console.log(response.data);
   };
 
   useEffect(() => {
@@ -40,6 +36,7 @@ const DeptList = () => {
 
   return (
     <>
+      <Meta name="description" content="부서 조회 페이지입니다." />
       <h1 className="text-2xl font-bold mb-6">부서 조회</h1>
 
       <div className="flex justify-center mb-4">
@@ -51,16 +48,16 @@ const DeptList = () => {
           onChange={onChangeSearchKeyword}
         />
         <button
-          className="bg-blue-500 text-white hover:bg-blue-600 px-4 py-2 rounded-r"
+          className="bg-blue-700 text-white hover:bg-blue-800 px-4 py-2 rounded-r min-w-[5rem]"
           onClick={selectList}
         >
-          Search
+          검색
         </button>
       </div>
 
       <div>
         <table className="w-[100%] border border-gray-200">
-          <thead className="bg-blue-500 text-white">
+          <thead className="bg-blue-700 text-white">
             <tr>
               <th className="px-4 py-2 border-b">dname</th>
               <th className="px-4 py-2 border-b">loc</th>

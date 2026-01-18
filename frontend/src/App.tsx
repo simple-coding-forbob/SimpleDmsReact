@@ -1,9 +1,14 @@
-import { RouterProvider } from 'react-router-dom';
-import router from './routers/routes';
-import './App.css';
+import { HeadProvider } from "react-head";
+import { RouterProvider } from "react-router-dom";
+import "./App.css";
+import router from "./routers/router";
 
 function App() {
-  return (<RouterProvider router={router} />);
+  return (
+    <HeadProvider>
+      <RouterProvider router={router} />
+    </HeadProvider>
+  );
 }
 
-export default App
+export default App;

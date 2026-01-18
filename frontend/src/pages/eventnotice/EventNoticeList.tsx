@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import type IEventNotice from "../../types/IEventNotice";
 import EventNoticeService from "../../services/EventNoticeService";
-
+import { Meta } from "react-head";
 
 const EventNoticeList = () => {
   const [eventNotices, setEventNotice] = useState<IEventNotice[]>([]);
@@ -23,15 +23,15 @@ const EventNoticeList = () => {
   };
 
   const selectList = async () => {
-    try {
-      const response = await EventNoticeService.getAll(searchKeyword, page - 1, size);
-      const { result, totalNumber } = response.data;
-      setEventNotice(result);
-      setTotalNumber(totalNumber);
-      console.log(response.data);
-    } catch (e) {
-      console.log(e);
-    }
+    const response = await EventNoticeService.getAll(
+      searchKeyword,
+      page - 1,
+      size
+    );
+    const { result, totalNumber } = response.data;
+    setEventNotice(result);
+    setTotalNumber(totalNumber);
+    console.log(response.data);
   };
 
   useEffect(() => {
@@ -40,6 +40,7 @@ const EventNoticeList = () => {
 
   return (
     <>
+      <Meta name="description" content="공지사항 조회 페이지입니다." />
       <h1 className="text-2xl font-bold mb-6">공지사항 조회</h1>
 
       <div className="flex justify-center mb-4">
@@ -51,16 +52,16 @@ const EventNoticeList = () => {
           onChange={onChangeSearchKeyword}
         />
         <button
-          className="bg-blue-500 text-white hover:bg-blue-600 px-4 py-2 rounded-r"
+          className="bg-blue-700 text-white hover:bg-blue-800 px-4 py-2 rounded-r min-w-[5rem]"
           onClick={selectList}
         >
-          Search
+          검색
         </button>
       </div>
 
       <div>
         <table className="w-[100%] border border-gray-200">
-          <thead className="bg-blue-500 text-white">
+          <thead className="bg-blue-700 text-white">
             <tr>
               <th className="px-4 py-2 border-b">subject</th>
               <th className="px-4 py-2 border-b">text</th>
@@ -73,7 +74,9 @@ const EventNoticeList = () => {
             {eventNotices.map((data) => (
               <tr key={data.eid} className="hover:bg-gray-50">
                 <td className="px-4 py-2 border-b">
-                  <Link to={`/event-notice-detail/${data.eid}`}>{data.subject}</Link>
+                  <Link to={`/event-notice-detail/${data.eid}`}>
+                    {data.subject}
+                  </Link>
                 </td>
                 <td className="px-4 py-2 border-b">{data.text}</td>
                 <td className="px-4 py-2 border-b">{data.isVisible}</td>

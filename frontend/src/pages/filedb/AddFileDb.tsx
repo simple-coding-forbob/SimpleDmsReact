@@ -3,28 +3,25 @@ import type { ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import FileDbService from "../../services/FileDbService";
 
+import { Meta } from "react-head";
+import messages from "../../common/messages";
 import type IFileDb from "../../types/IFileDb";
-import fileDbValidation from "../../utils/fileDbValidation";
+import fileDbValidation from "../../validation/fileDbValidation";
 
 function AddFileDb() {
   const nav = useNavigate();
 
   const insert = async (data: IFileDb) => {
-    try {
-      await FileDbService.insert(data);
-      alert("저장되었습니다");
-      nav("/fileDb"); // 업로드 성공 시 강제 이동
-    } catch (e) {
-      console.error(e);
-      alert("오류가 발생했습니다.");
-    }
+    await FileDbService.insert(data);
+    alert(messages.save);
+    nav("/fileDb"); // 업로드 성공 시 강제 이동
   };
 
   const formik = useFormik({
     initialValues: {
       fileTitle: "",
       fileContent: "",
-      fileData: null as File | null
+      fileData: null as File | null,
     },
     validationSchema: fileDbValidation,
     onSubmit: (values) => {
@@ -38,7 +35,8 @@ function AddFileDb() {
   };
 
   return (
-    <div className="submit-form">
+    <>
+      <Meta name="description" content="이미지 업로드 페이지입니다." />
       <h1 className="text-2xl font-bold mb-6">이미지 업로드</h1>
 
       <form onSubmit={formik.handleSubmit}>
@@ -105,12 +103,12 @@ function AddFileDb() {
         {/* 버튼 */}
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+          className="w-full bg-blue-700 text-white p-2 rounded hover:bg-blue-800"
         >
           업로드
         </button>
       </form>
-    </div>
+    </>
   );
 }
 

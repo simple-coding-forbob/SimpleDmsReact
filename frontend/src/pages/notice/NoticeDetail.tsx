@@ -1,9 +1,11 @@
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
+import { Meta } from "react-head";
 import { useNavigate, useParams } from "react-router-dom";
-import type INotice from "../../types/INotice";
+import messages from "../../common/messages";
 import NoticeService from "../../services/NoticeService";
-import noticeValidation from "../../utils/noticeValidation";
+import type INotice from "../../types/INotice";
+import noticeValidation from "../../validation/noticeValidation";
 
 function NoticeDetail() {
   const params = useParams<{ nid: string }>();
@@ -18,38 +20,24 @@ function NoticeDetail() {
   }, [nid]);
 
   const get = async (nid: number) => {
-    try {
-      const response = await NoticeService.get(nid);
-      const { result } = response.data;
-      setNotice(result); // 서버 데이터 저장
-      console.log(result);
-    } catch (e) {
-      console.error(e);
-    }
+    const response = await NoticeService.get(nid);
+    const { result } = response.data;
+    setNotice(result); // 서버 데이터 저장
+    console.log(result);
   };
 
   // 수정
   const update = async (data: INotice) => {
-    try {
-      await NoticeService.update(nid, data);
-      alert("수정되었습니다");
-      nav("/notice");
-    } catch (e) {
-      console.error(e);
-      alert("오류: " + e);
-    }
+    await NoticeService.update(nid, data);
+    alert(messages.update);
+    nav("/notice");
   };
 
   // 삭제
   const remove = async () => {
-    try {
-      await NoticeService.remove(nid);
-      alert("삭제되었습니다");
-      nav("/notice");
-    } catch (e) {
-      console.error(e);
-      alert("오류: " + e);
-    }
+    await NoticeService.remove(nid);
+    alert(messages.delete);
+    nav("/notice");
   };
 
   // 서버 데이터가 준비되었을 때만 Formik 초기화
@@ -70,6 +58,7 @@ function NoticeDetail() {
 
   return (
     <>
+      <Meta name="description" content="공지사항 상세조회 페이지입니다." />
       <h1 className="text-2xl font-bold mb-6">공지사항 상세조회</h1>
 
       <form onSubmit={formik.handleSubmit}>
@@ -140,7 +129,7 @@ function NoticeDetail() {
             id="startDate"
             name="startDate"
             className="w-full border border-gray-300 rounded p-2"
-            value={formik.values.startDate??""}
+            value={formik.values.startDate}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />
@@ -156,7 +145,7 @@ function NoticeDetail() {
             id="endDate"
             name="endDate"
             className="w-full border border-gray-300 rounded p-2"
-            value={formik.values.endDate??""}
+            value={formik.values.endDate}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
           />

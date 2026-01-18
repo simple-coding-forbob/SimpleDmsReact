@@ -4,7 +4,7 @@ import Pagination from "rc-pagination";
 import { Link } from "react-router-dom";
 import EmpService from "../../services/EmpService";
 import type IEmp from "../../types/IEmp";
-
+import { Meta } from "react-head";
 
 const EmpList = () => {
   const [emps, setEmp] = useState<IEmp[]>([]);
@@ -23,15 +23,12 @@ const EmpList = () => {
     setPage(1);
   };
 
-  const selectList = () => {
-    EmpService.getAll(searchKeyword, page - 1, size)
-      .then((response) => {
-        const { result, totalNumber } = response.data;
-        setEmp(result);
-        setTotalNumber(totalNumber);
-        console.log(response.data);
-      })
-      .catch((e: Error) => console.log(e));
+  const selectList = async () => {
+    const response = await EmpService.getAll(searchKeyword, page - 1, size);
+    const { result, totalNumber } = response.data;
+    setEmp(result);
+    setTotalNumber(totalNumber);
+    console.log(response.data);
   };
 
   useEffect(() => {
@@ -40,6 +37,7 @@ const EmpList = () => {
 
   return (
     <>
+      <Meta name="description" content="사원 조회 페이지입니다." />
       <h1 className="text-2xl font-bold mb-6">사원 조회</h1>
 
       <div className="flex justify-center mb-4">
@@ -51,17 +49,18 @@ const EmpList = () => {
           onChange={onChangeSearchKeyword}
         />
         <button
-          className="bg-blue-500 text-white hover:bg-blue-600 px-4 py-2 rounded-r"
+          className="bg-blue-700 text-white hover:bg-blue-800 px-4 py-2 rounded-r min-w-[5rem]"
           onClick={selectList}
         >
-          Search
+          검색
         </button>
       </div>
 
       <div>
         <table className="w-[100%] border border-gray-200">
-          <thead className="bg-blue-500 text-white">
+          <thead className="bg-blue-700 text-white">
             <tr>
+              <th className="px-4 py-2 border-b">eno</th>
               <th className="px-4 py-2 border-b">ename</th>
               <th className="px-4 py-2 border-b">job</th>
               <th className="px-4 py-2 border-b">manager</th>
@@ -75,8 +74,9 @@ const EmpList = () => {
             {emps.map((data) => (
               <tr key={data.eno} className="hover:bg-gray-50">
                 <td className="px-4 py-2 border-b">
-                  <Link to={`/emp-detail/${data.eno}`}>{data.ename}</Link>
+                  <Link to={`/emp-detail/${data.eno}`}>{data.eno}</Link>
                 </td>
+                <td className="px-4 py-2 border-b">{data.ename}</td>
                 <td className="px-4 py-2 border-b">{data.job}</td>
                 <td className="px-4 py-2 border-b">{data.manager}</td>
                 <td className="px-4 py-2 border-b">{data.hiredate}</td>

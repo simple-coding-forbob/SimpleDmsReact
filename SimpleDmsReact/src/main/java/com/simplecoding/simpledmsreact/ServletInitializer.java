@@ -7,7 +7,7 @@ public class ServletInitializer extends SpringBootServletInitializer {
 
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(SimpleDmsReactLoginApplication.class);
+        return application.sources(SimpleDmsReactApplication.class);
     }
 
 }

@@ -12,20 +12,6 @@ const common = axios.create({
 });
 
 // 공통 벡엔드 요청(axios) 인터셉터 (옵션)
-common.interceptors.request.use((config) => {
-  const rawJwt = localStorage.getItem("jwt");
-
-  if (rawJwt) {
-    // jwt 가 있다면 파싱시작
-    const jwt = JSON.parse(rawJwt);
-
-    if (jwt && jwt.accessToken) {
-      config.headers.Authorization = `Bearer ${jwt.accessToken}`;
-    }
-  }
-
-  return config;
-});
 
 // 공통 응답 인터셉터 (옵션)
 common.interceptors.response.use(

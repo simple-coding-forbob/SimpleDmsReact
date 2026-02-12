@@ -1,6 +1,5 @@
 # Qna 게시판
-## Qna 게시판 주소: http://localhost:8080/qna
-## spring - react 코딩 순서: 1) entity 2) dto 3) repository 4) service 5) controller
+## spring - jpa 코딩 순서: 1) entity 2) dto 3) repository 4) service 5) controller
 ## Qna 테이블: TB_QNA
 ### 컬럼: 
     QNO	        NUMBER

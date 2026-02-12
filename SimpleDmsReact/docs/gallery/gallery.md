@@ -1,6 +1,5 @@
 # Gallery 게시판
-## Gallery 게시판 주소: http://localhost:8080/gallery
-## spring - react 코딩 순서: 1) entity 2) dto 3) repository 4) service 5) controller
+## spring - jpa 코딩 순서: 1) entity 2) dto 3) repository 4) service 5) controller
 ## Gallery 테이블: TB_GALLERY
     UUID	         VARCHAR2(1000 BYTE)
     GALLERY_TITLE	 VARCHAR2(1000 BYTE)

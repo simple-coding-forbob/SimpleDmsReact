@@ -1,6 +1,5 @@
 # Faq 게시판
-## Faq 게시판 주소: http://localhost:8080/faq
-## spring - react 코딩 순서: 1) entity 2) dto 3) repository 4) service 5) controller
+## spring - jpa 코딩 순서: 1) entity 2) dto 3) repository 4) service 5) controller
 ## Faq 테이블: TB_FAQ
 ### 컬럼: 
     FNO	    NUMBER

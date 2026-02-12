@@ -1,6 +1,5 @@
 # 사원 게시판
-## 사원 게시판 주소: http://localhost:8080/emp
-## spring - react 코딩 순서: 1) entity 2) dto 3) repository 4) service 5) controller
+## spring - jpa 코딩 순서: 1) entity 2) dto 3) repository 4) service 5) controller
 ## 사원 테이블: TB_EMP
 ### 컬럼:
     ENO	        NUMBER

@@ -45,12 +45,6 @@ public class FileDbService {
         fileDbRepository.save(fileDb);                                        // 4) DB insert(fileDbVO)
     }
 
-    //    상세조회
-    public FileDb findById(String uuid) {
-        return fileDbRepository.findById(uuid)
-                .orElseThrow(() -> new RuntimeException(commonUtil.getMessage("errors.not.found")));
-    }
-
     //    삭제 함수
     public void deleteById(String uuid) {
         commonUtil.deleteFile(uuid);                       // 1) 업로드 폴더에 파일 삭제하기

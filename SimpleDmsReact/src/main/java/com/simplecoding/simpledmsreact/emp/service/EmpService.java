@@ -3,6 +3,7 @@ package com.simplecoding.simpledmsreact.emp.service;
 
 import com.simplecoding.simpledmsreact.common.CommonUtil;
 import com.simplecoding.simpledmsreact.common.MapStruct;
+import com.simplecoding.simpledmsreact.dept.entity.Dept;
 import com.simplecoding.simpledmsreact.emp.dto.EmpDto;
 import com.simplecoding.simpledmsreact.emp.entity.Emp;
 import com.simplecoding.simpledmsreact.emp.repository.EmpRepository;
@@ -48,6 +49,12 @@ public class EmpService {
 //        JPA 저장 함수 실행 : return 값 : 저장된 객체
         Emp emp=empRepository.findById(empDto.getEno())
                 .orElseThrow(() -> new RuntimeException("errors.not.found"));
+//      2) 참조키 수정 코드 추가 필요: Emp(dept), EmpDto(dno) : 모양이 틀림
+//        => 플러그인: 같은 모양 일경우 비교 가능: Emp(ename) <-> EmpDto(ename),
+//        => 해결: EmpDto의 dno 를 넣은 dept 만들어서 비교
+        Dept dept=new Dept();
+        dept.setDno(empDto.getDno());   // 참조키 넣기
+        emp.setDept(dept);              // 참조키는 여기서 다른지 비교
 
         mapStruct.updateFromDto(empDto, emp);
     }

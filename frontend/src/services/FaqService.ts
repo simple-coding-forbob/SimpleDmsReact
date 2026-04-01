@@ -1,6 +1,6 @@
 ﻿// axios 공통함수 : 벡엔드 연동IApiResponse
 
-import type IFaq from "../types/IFaq";
+import type {IFaq} from "../types/IFaq";
 
 import common from "../common/CommonService";
 

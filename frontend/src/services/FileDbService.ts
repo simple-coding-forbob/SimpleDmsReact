@@ -1,6 +1,6 @@
 // FiledbService.ts
 import common from "../common/CommonService";
-import type IFileDb from "../types/IFileDb";
+import type {IFileDb} from "../types/IFileDb";
 
 // 전체 조회 (like 검색 + 페이징)
 const getAll = (searchKeyword: string, page: number, size: number) => {
@@ -10,7 +10,7 @@ const getAll = (searchKeyword: string, page: number, size: number) => {
 };
 
 // 삭제
-const remove = (uuid: number) => {
+const remove = (uuid: string) => {
   return common.delete(`/fileDb/${uuid}`);
 };
 
@@ -23,9 +23,7 @@ const insert = (data: IFileDb) => {
     formData.append("fileData", data.fileData);
   }
 
-  return common.post("/fileDb", formData, {
-    headers: { "Content-Type": "multipart/form-data" },
-  });
+  return common.post("/fileDb", formData, {headers: { "Content-Type": "multipart/form-data" }});
 };
 
 const FiledbService = {

@@ -49,7 +49,6 @@ public class DeptService {
 //        JPA 저장 함수 실행 : return 값 : 저장된 객체
         Dept dept=deptRepository.findById(deptDto.getDno())
                 .orElseThrow(() -> new RuntimeException(commonUtil.getMessage("errors.not.found")));
-
         mapStruct.updateFromDto(deptDto, dept);
 //        deptRepository.save(dept);     // dirty checking 으로 인해 필요없음
     }

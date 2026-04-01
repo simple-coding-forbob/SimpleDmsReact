@@ -1,9 +1,5 @@
 package com.simplecoding.simpledmsreact.dept.repository;
 
-
-
-
-
 import com.simplecoding.simpledmsreact.dept.dto.DeptDto;
 import com.simplecoding.simpledmsreact.dept.entity.Dept;
 import org.springframework.data.domain.Page;

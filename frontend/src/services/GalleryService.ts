@@ -1,6 +1,6 @@
 // FiledbService.ts
 import common from "../common/CommonService";
-import type IGallery from "../types/IGallery";
+import type {IGallery} from "../types/IGallery";
 
 // 전체 조회 (like 검색 + 페이징)
 const getAll = (searchKeyword: string, page: number, size: number) => {
@@ -10,7 +10,7 @@ const getAll = (searchKeyword: string, page: number, size: number) => {
 };
 
 // 삭제
-const remove = (uuid: number) => {
+const remove = (uuid: string) => {
   return common.delete(`/gallery/${uuid}`);
 };
 

@@ -6,6 +6,7 @@ import jakarta.persistence.PersistenceContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+// 목적 : QueryDsl 플러그인 : sql 작성하는 또다른 플러그인 설정
 @Configuration
 public class QuerydslConfig {
     @PersistenceContext                          // JPA 클래스만 제공받습니다.(@Autowired 와 비슷합니다.)

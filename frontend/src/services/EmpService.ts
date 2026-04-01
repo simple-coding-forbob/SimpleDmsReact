@@ -1,7 +1,7 @@
 ﻿// axios 공통함수 : 벡엔드 연동
 
 import common from "../common/CommonService";
-import type IEmp from "../types/IEmp";
+import type {IEmp} from "../types/IEmp";
 
 const getAll = (searchKeyword: string, page: number, size: number) => {
   return common.get("/emp", {

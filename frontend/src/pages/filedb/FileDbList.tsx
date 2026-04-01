@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Meta } from "react-head";
 import messages from "../../common/messages";
 import FileDbService from "../../services/FileDbService";
-import type IFileDb from "../../types/IFileDb";
+import type {IFileDb} from "../../types/IFileDb";
 
 const FiledbList = () => {
   const [fileDbs, setFileDbs] = useState<IFileDb[]>([]);
@@ -38,7 +38,7 @@ const FiledbList = () => {
   };
 
   // 삭제
-  const remove = async (uuid: number) => {
+  const remove = async (uuid: string) => {
     await FileDbService.remove(uuid);
     alert(messages.delete);
     selectList();
@@ -89,7 +89,7 @@ const FiledbList = () => {
               <div className="mt-2 flex space-x-2">
                 <button
                   className="px-2 py-1 bg-red-500 rounded text-white"
-                  onClick={() => remove(data.uuid!)}
+                  onClick={() => remove(data.uuid??"")}
                 >
                   삭제
                 </button>

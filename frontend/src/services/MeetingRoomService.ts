@@ -1,6 +1,6 @@
 ﻿// axios 공통함수 : 벡엔드 연동IApiResponse
 
-import type IMeetingRoom from "../types/IMeetingRoom";
+import type {IMeetingRoom} from "../types/IMeetingRoom";
 
 import common from "../common/CommonService";
 

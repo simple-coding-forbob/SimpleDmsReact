@@ -73,13 +73,12 @@ public class FileDbController {
     @Operation(summary = "FileDb 다운로드", description = "UUID로 첨부파일을 다운로드합니다.")
     @GetMapping("/download/fileDb/{uuid}")
     public ResponseEntity<byte[]> fileDownload(@PathVariable String uuid) throws Exception {
-        FileDb fileDb = fileDbService.findById(uuid);
         // 서버에 저장된 실제 파일 경로
         byte[] file= commonUtil.readFile(uuid);
 
         // ContentDisposition 사용 (브라우저 호환성 보장)
         ContentDisposition contentDisposition = ContentDisposition.attachment()
-                .filename(fileDb.getUuid(), StandardCharsets.UTF_8) // 실제 업로드한 파일명
+                .filename(uuid, StandardCharsets.UTF_8)
                 .build();
 
         return ResponseEntity.ok()

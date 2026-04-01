@@ -9,8 +9,7 @@ import lombok.*;
 @SequenceGenerator(
         name = "SQ_DEPT_JPA",
         sequenceName = "SQ_DEPT",
-        initialValue = 10,
-        allocationSize = 10
+        allocationSize = 1
 )
 @Getter
 @Setter

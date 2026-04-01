@@ -1,5 +1,5 @@
-export default interface IGallery {
-  uuid?: number;
+export interface IGallery {
+  uuid?: string;
   galleryTitle: string;
   fileData?: File | null;
   galleryFileUrl?: string;

@@ -76,15 +76,12 @@ public class GalleryController {
     @GetMapping("/download/gallery/{uuid}")
     public ResponseEntity<byte[]> fileDownload(
             @Parameter(description = "다운로드할 갤러리 UUID") @PathVariable String uuid) throws Exception {
-
-        Gallery gallery = galleryService.findById(uuid);
-
         // 서버에 저장된 실제 파일 읽기
         byte[] file = commonUtil.readFile(uuid);
 
         // Content-Disposition 헤더 설정 (브라우저 호환)
         ContentDisposition contentDisposition = ContentDisposition.attachment()
-                .filename(gallery.getUuid(), StandardCharsets.UTF_8)
+                .filename(uuid, StandardCharsets.UTF_8)
                 .build();
 
         return ResponseEntity.ok()

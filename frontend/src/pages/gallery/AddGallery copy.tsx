@@ -1,0 +1,53 @@
+import { Meta } from "react-head";
+
+function AddGallery() {
+
+  return (
+    <>
+      <Meta name="description" content="이미지 업로드 페이지입니다." />
+      <h1 className="text-2xl font-bold mb-6">이미지 업로드</h1>
+
+      <form>
+        {/* 이미지명 */}
+        <div className="mb-4">
+          <label htmlFor="galleryTitle" className="block mb-1">
+            이미지명
+          </label>
+          <input
+            type="text"
+            id="galleryTitle"
+            name="galleryTitle"
+            placeholder="이미지명"
+            className="w-full border border-gray-300 rounded p-2 focus:outline-none focus:ring focus:ring-blue-500"
+          />
+        </div>
+
+        {/* 파일 선택 */}
+        <div className="mb-4">
+          <label className="block mb-1">파일 선택</label>
+          <div className="flex items-center gap-2">
+            <label className="cursor-pointer bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+              파일 선택
+              <input
+                type="file"
+                name="fileData"
+                className="hidden"
+              />
+            </label>
+            <span></span>
+          </div>
+        </div>
+
+        {/* 버튼 */}
+        <button
+          type="submit"
+          className="w-full bg-blue-700 text-white p-2 rounded hover:bg-blue-800"
+        >
+          업로드
+        </button>
+      </form>
+    </>
+  );
+}
+
+export default AddGallery;

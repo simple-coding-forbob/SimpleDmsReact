@@ -1,6 +1,6 @@
 ﻿// axios 공통함수 : 벡엔드 연동IApiResponse
 
-import type IPublicCar from "../types/IPublicCar";
+import type {IPublicCar} from "../types/IPublicCar";
 
 import common from "../common/CommonService";
 

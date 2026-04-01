@@ -43,12 +43,6 @@ public class GalleryService {
         galleryRepository.save(gallery);
     }
 
-    // 상세조회
-    public Gallery findById(String uuid) {
-        return galleryRepository.findById(uuid)
-                .orElseThrow(() -> new RuntimeException(commonUtil.getMessage("errors.not.found")));
-    }
-
     // 삭제 (DB + 파일 삭제)
     public void deleteById(String uuid) {
         commonUtil.deleteFile(uuid); // 서버 파일 삭제
